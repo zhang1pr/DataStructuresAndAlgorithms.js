@@ -103,6 +103,3 @@ class BinarySearchTree {
     }
   }
 }
-
-// time:  O(logn) if balanced, else O(n)
-// space: O(1)
