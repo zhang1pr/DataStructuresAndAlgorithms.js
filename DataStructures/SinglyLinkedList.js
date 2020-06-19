@@ -13,10 +13,12 @@ class SinglyLinkedList {
 
   prepend(val) {
     const newNode = new ListNode(val, this.head);
-    this.head = newNode;
 
     if (!this.tail) {
       this.tail = newNode;
+      this.head = newNode;
+    } else {
+      this.head = newNode;
     }
 
     return this;
