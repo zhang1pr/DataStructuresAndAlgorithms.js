@@ -21,7 +21,7 @@ class SinglyLinkedList {
     
   }
 
-  find(val) {
+  find(val, callback) {
     
   }
 

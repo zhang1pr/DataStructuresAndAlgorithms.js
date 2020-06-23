@@ -70,7 +70,7 @@ class SinglyLinkedList {
     return deletedNode;
   }
 
-  find(val) {
+  find(val, callback) {
     if (!this.head) {
       return null;
     }
@@ -78,6 +78,10 @@ class SinglyLinkedList {
     let currentNode = this.head;
 
     while (currentNode) {
+      if (callback && callback(currentNode)) {
+        return currentNode;
+      }
+
       if (currentNode.val === val) {
         return currentNode;
       }
@@ -183,3 +187,5 @@ class SinglyLinkedList {
     }
   }
 }
+
+module.exports = SinglyLinkedList;
