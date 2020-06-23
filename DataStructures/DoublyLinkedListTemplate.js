@@ -25,7 +25,11 @@ class DoublyLinkedList {
     
   }
 
-  find(val) {
+  findFromHead(val, callback) {
+    
+  }
+
+  findFromTail(val, callbackl) {
     
   }
 

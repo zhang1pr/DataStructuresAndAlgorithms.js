@@ -120,7 +120,7 @@ class DoublyLinkedList {
     return deletedNode;
   }
 
-  findFromHead(val) {
+  findFromHead(val, callback) {
     if (!this.head) {
       return null;
     }
@@ -128,6 +128,10 @@ class DoublyLinkedList {
     let currentNode = this.head;
 
     while (currentNode) {
+      if (callback && callback(currentNode)) {
+        return currentNode;
+      }
+
       if (currentNode.val == val) {
         return currentNode;
       }
@@ -138,7 +142,7 @@ class DoublyLinkedList {
     return null;
   }
 
-  findFromTail(val) {
+  findFromTail(val, callback) {
     if (!this.tail) {
       return null;
     }
@@ -146,6 +150,10 @@ class DoublyLinkedList {
     let currentNode = this.tail;
 
     while (currentNode) {
+      if (callback && callback(currentNode)) {
+        return currentNode;
+      }
+
       if (currentNode.val == val) {
         return currentNode;
       }
