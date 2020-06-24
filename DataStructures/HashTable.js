@@ -4,8 +4,6 @@ class HashTable {
   constructor(size = 32) {
     this.size = size;
     this.buckets = new Array(size).fill(null).map(() => new SinglyLinkedList());
-
-    this.keys = {};
   }
 
   hash(key) {
@@ -16,7 +14,6 @@ class HashTable {
 
   set(key, val) {
     const keyHash = this.hash(key);
-    this.keys[key] = keyHash;
     const bucketLinkedList = this.buckets[keyHash];
     const node = bucketLinkedList.find(null, node => node.val.key === key);
 
@@ -31,7 +28,6 @@ class HashTable {
 
   delete(key) {
     const keyHash = this.hash(key);
-    delete this.keys[key];
     const bucketLinkedList = this.buckets[keyHash];
     const node = bucketLinkedList.find(null, node => node.val.key === key);
 
@@ -43,7 +39,8 @@ class HashTable {
   }
 
   get(key) {
-    const bucketLinkedList = this.buckets[this.hash(key)];
+    const keyHash = this.hash(key);
+    const bucketLinkedList = this.buckets[keyHash];
     const node = bucketLinkedList.find(null, node => node.val.key === key);
 
     if (node) {
@@ -54,18 +51,10 @@ class HashTable {
   }
 
   has(key) {
-    return Object.hasOwnProperty.call(this.keys, key);
-  }
+    const keyHash = this.hash(key);
+    const bucketLinkedList = this.buckets[keyHash];
+    const node = bucketLinkedList.find(null, node => node.val.key === key);
 
-  getKeys() {
-    return Object.keys(this.keys);
-  }
-
-  getValues() {
-    return Object.values(this.keys);
-  }
-
-  getEntries() {
-    return Object.entries(this.keys);
+    return node != null;
   }
 }
