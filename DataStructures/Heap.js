@@ -1,73 +1,121 @@
 class Heap {
-  constructor(capacity) {
-    this.array = new Array(capacity + 1);
-    this.array[0] = null;
-    this.capacity = capacity;
-    this.count = 0;
+  constructor(array = []) {
+    this.array = array;
   }
 
-  insert(data) {
-    if (this.count >= this.capacity) {
-      return;
+  getLeftChildIndex(index) {
+    return 2 * index + 1;
+  }
+
+  getRightChildIndex(index) {
+    return 2 * index + 2;
+  }
+
+  getParentIndex(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  hasParent(index) {
+    return this.getParentIndex(index) >= 0;
+  }
+
+  hasLeftChild(index) {
+    return this.getLeftChildIndex(index) < this.array.length;
+  }
+
+  hasRightChild(index) {
+    return this.getRightChildIndex(index) < this.array.length;
+  }
+
+  leftChild(index) {
+    return this.array[this.getLeftChildIndex(index)];
+  }
+
+  rightChild(index) {
+    return this.array[this.getRightChildIndex(index)];
+  }
+
+  parent(index) {
+    return this.array[this.getParentIndex(index)];
+  }
+
+  swap(index1, index2) {
+    [this.array[index1], this.array[index2]] = [this.array[index2], this.array[index1]];
+  }
+
+  peek() {
+    if (this.array.length === 0) {
+      return null;
     }
-    
-    this.count++;
-    this.array[this.count] = data;
-    
-    let i = this.count;
-    while (Math.floor(i/2) > 0 && this.array[i] > this.array[Math.floor(i/2)]) {
-      [this.array[i], this.array[Math.floor(i/2)]] = [this.array[Math.floor(i/2)], this.array[i]];
-      i = Math.floor(i/2);
+
+    return this.array[0];
+  }
+
+  poll() {
+    if (this.array.length === 0) {
+      return null;
+    }
+
+    if (this.array.length === 1) {
+      return this.array.pop();
+    }
+
+    const item = this.array[0];
+
+    this.array[0] = this.array.pop();
+    this.heapifyDown(0);
+
+    return item;
+  }
+
+  add(item) {
+    this.array.push(item);
+    this.heapifyUp(this.array.length - 1);
+    return this;
+  }
+
+  buildHeap() {
+    for (let i = Math.floor(this.array.length - 1/2); i >= 0; i--) {
+      this.heapifyDown(i);
+    }
+
+    return this;
+  }
+
+  heapifyUp(index) {
+    while (
+      this.hasParent(index)
+      && !this.checkInvariant(this.parent(index), this.array[index])
+    ) {
+      this.swap(index, this.getParentIndex(index));
+      index = this.getParentIndex(index);
     }
   }
 
-  removeMax() {
-    if (this.count == 0) {
-      return -1;
-    }
-    
-    a[1] = a[this.count];
-    this.count--;
-    heapify(1);
-  }
+  heapifyDown(index) {
+    let currentIndex = index;
+    let nextIndex = null;
 
-  heapify(i) {
-    while (true) {
-      let maxPos = i;
-      if (i*2 <= this.count && this.array[i] < this.array[i*2]) {
-        maxPos = i*2;
+    while (this.hasLeftChild(currentIndex)) {
+      if (
+        this.hasRightChild(currentIndex)
+        && this.checkInvariant(this.rightChild(currentIndex), this.leftChild(currentIndex))
+      ) {
+        nextIndex = this.getRightChildIndex(currentIndex);
+      } else {
+        nextIndex = this.getLeftChildIndex(currentIndex);
       }
-      
-      if (i*2 + 1 <= this.count && this.array[maxPos] < this.array[i*2 + 1]) {
-        maxPos = i*2 + 1;
-      }
-      
-      if (maxPos === i) {
+
+      if (this.checkInvariant(this.array[currentIndex], this.array[nextIndex])) {
         break;
       }
-      
-      [this.array[i], this.array[maxPos]] = [this.array[maxPos], this.array[i]];
-      i = maxPos;
+
+      this.swap(currentIndex, nextIndex);
+      currentIndex = nextIndex;
     }
   }
 
-  buildHeap(n) {
-    for (let i = n/2; i >= 1; i--) {
-      this.heapify(i);
-    }
-  }
-
-  sort() {
-    this.buildHeap(this.capacity);
-    
-    let i = Math.floor(this.capacity);
-    while (i > 1) {
-      [this.array[i], this.array[1]] = [this.array[1], this.array[i]];
-      i--;
-      this.count--;
-      this.heapify(1);
-    }
+  checkInvariant(item1, item2) {
+    return item1 >= item2;
   }
 }
-
-module.exports = Heap;
