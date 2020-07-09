@@ -1,12 +1,12 @@
-const Heap = require('../../DataStructures/Heap.js');
+const Heap = require('../../DataStructures/Heap');
 
-const heap = new Heap(10);
+function HeapSort(array) {
+  const heap = new Heap(array);
+  
+  heap.buildHeap();
 
-for (let i = 1; i <= 10; i++) {
-  heap.insert(i);
+  return heap.array;
 }
-
-heap.sort();
 
 // time:  O(nlog(n))
 // space: O(1) - in place
