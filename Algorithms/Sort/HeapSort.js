@@ -1,13 +1,19 @@
 const Heap = require('../../DataStructures/Heap');
 
 function HeapSort(array) {
-  const heap = new Heap(array);
+  const heap = new Heap()
   
-  heap.buildHeap();
+  while (array.length) {
+    heap.add(array.pop());
+  }
+  
+  while (!heap.isEmpty()) {
+    array.push(heap.poll());
+  }
 
-  return heap.array;
+  return array;
 }
 
 // time:  O(nlog(n))
-// space: O(1) - in place
+// space: O(1)
 // not stable
