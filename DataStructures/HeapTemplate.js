@@ -55,8 +55,8 @@ class Heap {
 
   }
 
-  buildHeap() {
-
+  isEmpty() {
+    
   }
 
   heapifyUp(index) {

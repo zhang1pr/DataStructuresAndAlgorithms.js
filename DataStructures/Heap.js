@@ -1,6 +1,6 @@
 class Heap {
-  constructor(array = []) {
-    this.array = array;
+  constructor() {
+    this.array = [];
   }
 
   getLeftChildIndex(index) {
@@ -74,12 +74,8 @@ class Heap {
     return this;
   }
 
-  buildHeap() {
-    for (let i = Math.floor(this.array.length - 1/2); i >= 0; i--) {
-      this.heapifyDown(i);
-    }
-
-    return this;
+  isEmpty() {
+    return this.array.length == 0;
   }
 
   heapifyUp(index) {
