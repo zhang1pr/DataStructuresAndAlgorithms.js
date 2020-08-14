@@ -1,4 +1,4 @@
-class Stack {
+class StackBySinglyLinkedList {
   constructor() {
 
   }

@@ -5,14 +5,15 @@ class StackNode {
   }
 }
 
-class Stack {
+class StackBySinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.size = 0;
   }
 
   isEmpty() {
-    return !this.head;
+    return this.size == 0;
   }
 
   peek() {
@@ -24,6 +25,8 @@ class Stack {
   }
 
   push(val) {
+    this.size++;
+
     const newNode = new StackNode(val, this.head);
 
     if (!this.tail) {
@@ -40,6 +43,8 @@ class Stack {
     if (!this.head) {
       return null;
     }
+
+    this.size--;
 
     const deletedHead = this.head;
 
