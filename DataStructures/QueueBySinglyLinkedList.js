@@ -9,10 +9,11 @@ class QueueBySinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.size = 0;
   }
 
   isEmpty() {
-    return !this.head;
+    return this.size == 0;
   }
 
   peek() {
@@ -24,6 +25,8 @@ class QueueBySinglyLinkedList {
   }
 
   enqueue(val) {
+    this.size++;
+
     const newNode = new QueueNode(val);
 
     if (!this.head) {
@@ -38,6 +41,8 @@ class QueueBySinglyLinkedList {
   }
 
   dequeue() {
+    this.size--;
+    
     if (!this.head) {
       return null;
     }
