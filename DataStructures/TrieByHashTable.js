@@ -36,7 +36,7 @@ class TrieNode {
   }
 
   hasChildren() {
-    return [...this.children.keys()].length !== 0;
+    return this.children.size !== 0;
   }
 
   getChildren() {
