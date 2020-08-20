@@ -24,7 +24,7 @@ class TrieNode {
   removeChild(char) {
     const childNode = this.getChild(char);
 
-    if (childNode && !childNode.isEnd && !childNode.hasChildren()) {
+    if (!childNode.isEnd && !childNode.hasChildren()) {
       this.children.delete(char);
     }
 
@@ -50,11 +50,10 @@ class Trie {
   }
 
   addWord(word) {
-    const chars = [...word];
     let currentNode = this.head;
 
-    for (let index = 0; index < chars.length; index++) {
-      currentNode = currentNode.addChild(chars[index], index == chars.length - 1);
+    for (let index = 0; index < word.length; index++) {
+      currentNode = currentNode.addChild(word[index], index == word.length - 1);
     }
 
     return this;
@@ -104,15 +103,14 @@ class Trie {
   }
 
   getLastCharacterNode(word) {
-    const chars = [...word];
     let currentNode = this.head;
 
-    for (let index = 0; index < chars.length; index++) {
-      if (!currentNode.hasChild(chars[index])) {
+    for (let index = 0; index < word.length; index++) {
+      if (!currentNode.hasChild(word[index])) {
         return null;
       }
 
-      currentNode = currentNode.getChild(chars[index]);
+      currentNode = currentNode.getChild(word[index]);
     }
 
     return currentNode;

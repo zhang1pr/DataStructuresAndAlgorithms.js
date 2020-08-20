@@ -4,6 +4,7 @@ class TrieNode {
   }
 
   getChild(char) {
+    
   }
 
   addChild(char, isEnd = false) {
