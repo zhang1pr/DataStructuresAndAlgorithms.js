@@ -1,6 +1,6 @@
 class QueueByArray {
   constructor(capacity) {
-    this.items = [...new Array(capacity)];
+    this.items = Array(capacity);
     this.capacity = capacity;
     this.head = 0;
     this.tail = 0;
