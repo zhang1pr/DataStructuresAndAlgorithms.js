@@ -28,7 +28,7 @@ class SegmentTree {
       treeLength = 2 * nextPower - 1;
     }
 
-    return new Array(treeLength).fill(null);
+    return Array(treeLength).fill(null);
   }
 
   buildTree(leftIndex, rightIndex, position) {
