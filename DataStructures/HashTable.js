@@ -3,7 +3,7 @@ const SinglyLinkedList = require('./SinglyLinkedList');
 class HashTable {
   constructor(size = 32) {
     this.size = size;
-    this.buckets = new Array(size).fill(null).map(() => new SinglyLinkedList());
+    this.buckets = [...Array(size)].map(() => new SinglyLinkedList());
   }
 
   hash(key) {
