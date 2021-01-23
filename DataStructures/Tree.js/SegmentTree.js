@@ -1,8 +1,8 @@
 class SegmentTree {
-  constructor(array, operation, defaultValue) {
+  constructor(array, operation, defaultVal) {
     this.array = array;
     this.operation = operation;
-    this.defaultValue = defaultValue;
+    this.defaultVal = defaultVal;
 
     this.tree = this.createTree(this.array);
 
@@ -54,7 +54,7 @@ class SegmentTree {
     }
 
     if (queryLeftIndex > rightIndex || queryRightIndex < leftIndex) {
-      return this.defaultValue;
+      return this.defaultVal;
     }
 
     const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
