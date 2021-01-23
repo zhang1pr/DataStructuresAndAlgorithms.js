@@ -1,7 +1,7 @@
 class TrieNode {
   constructor(isEnd = false) {
     this.isEnd = isEnd;
-    this.children = new Array(26).fill(null);
+    this.children = Array(26).fill(null);
   }
 
   getChild(char) {
