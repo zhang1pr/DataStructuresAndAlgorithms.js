@@ -32,7 +32,7 @@ class HashTable {
     const node = bucketLinkedList.find(null, node => node.val.key === key);
 
     if (node) {
-      return bucketLinkedList.delete(node.value);
+      return bucketLinkedList.delete(node.val);
     }
 
     return null;

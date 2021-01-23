@@ -22,16 +22,4 @@ class HashTable {
   has(key) {
 
   }
-
-  getKeys() {
-
-  }
-
-  getValues() {
-
-  }
-
-  getEntries() {
-
-  }
 }
