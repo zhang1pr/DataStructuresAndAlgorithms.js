@@ -1,6 +1,5 @@
 class TrieNode {
-  constructor(char, isEnd = false) {
-    this.char = char;
+  constructor(isEnd = false) {
     this.isEnd = isEnd;
     this.children = new Map();
   }
