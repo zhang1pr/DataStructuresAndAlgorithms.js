@@ -4,7 +4,7 @@ class BinaryIndexedTree {
     this.array = Array(this.size + 1).fill(0);
   }
 
-  increase(position, value) {
+  add(position, value) {
     for (let i = position; i <= this.size; i += (i & -i)) {
       this.array[i] += value;
     }

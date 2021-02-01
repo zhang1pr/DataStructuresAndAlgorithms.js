@@ -3,7 +3,7 @@ class BinaryIndexedTree {
 
   }
 
-  increase(position, value) {
+  add(position, value) {
 
   }
 
