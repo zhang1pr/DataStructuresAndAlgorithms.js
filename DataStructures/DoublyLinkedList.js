@@ -117,7 +117,7 @@ class DoublyLinkedList {
       currentNode = currentNode.prev;
     }
 
-    return deletedNode;
+    return deletedNode.val;
   }
 
   findFromHead(val, callback) {
@@ -179,7 +179,7 @@ class DoublyLinkedList {
       this.tail = null;
     }
 
-    return deletedHead;
+    return deletedHead.val;
   }
 
   deleteTail() {
@@ -197,7 +197,7 @@ class DoublyLinkedList {
       this.tail.next = null;
     }
 
-    return deletedTail;
+    return deletedTail.val;
   }
 
   reverse() {
