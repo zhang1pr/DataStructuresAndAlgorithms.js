@@ -3,53 +3,73 @@ class TreeNode {
 
   }
 
-  setLeft(node) {
+  find(k) {
 
   }
-
-  setRight(node) {
-
-  }
-
+      
   findMin() {
+    
+  }
+
+  nextLarger() {
+
+  }
+
+  insert(node) {
 
   }
   
-  replaceChild(nodeToReplace, replacementNode) {
+  delete() {
+    
+  }     
 
+  findAtLeast(k) {
+   
   }
 
-  insert(val) {
-
-  }
-
-  find(val) {
-
-  }
-
-  contains(val) {
-
-  }
-
-  remove(val) {
+  findAtMost(k) {
     
   }
 }
 
 class BinarySearchTree {
   constructor() {
+
+  }
+
+  find(k) {
+
+  }
+
+  findMin() {
+
+  }
+      
+  insert(k) {
+
+  }
+
+  delete(k) {
+
+  }
+
+  nextLarger(k) {
+    
+  } 
+
+  findAtLeast(k) {
     
   }
 
-  insert(val) {
-
+  findAtMost(k) {
+    
   }
 
-  contains(val) {
-
+  deleteAtLeast(k) {
+    
   }
 
-  remove(val) {
-
+  deleteAtMost(k) {
+  
   }
 }

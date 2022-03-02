@@ -1,173 +1,216 @@
 class TreeNode {
-  constructor(val = null) {
-    this.val = val;
+  constructor(parent, k) {
+    this.key = k
+    this.parent = parent;
     this.left = null;
     this.right = null;
-    this.parent = null;
   }
 
-  setLeft(node) {
-    if (this.left) {
-      this.left.parent = null;
-    }
-
-    this.left = node;
-
-    if (this.left) {
-      this.left.parent = this;
-    }
-
-    return this;
-  }
-
-  setRight(node) {
-    if (this.right) {
-      this.right.parent = null;
-    }
-
-    this.right = node;
-
-    if (node) {
-      this.right.parent = this;
-    }
-
-    return this;
-  }
-
-  findMin() {
-    if (!this.left) {
-      return this;
-    }
-
-    return this.left.findMin();
-  }
-  
-  replaceChild(nodeToReplace, replacementNode) {
-    if (!nodeToReplace || !replacementNode) {
-      return false;
-    }
-
-    if (this.left && this.left == nodeToReplace) {
-      this.left = replacementNode;
-      return true;
-    }
-
-    if (this.right && this.right == nodeToReplace) {
-      this.right = replacementNode;
-      return true;
-    }
-
-    return false;
-  }
-
-  insert(val) {
-    if (this.val == null) {
-      this.val = val;
-
-      return this;
-    }
-
-    if (val < this.val) {
+  find(k) {
+    if (k == this.key) return this
+    
+    if (k < this.key) {
       if (this.left) {
-        return this.left.insert(val);
-      }
-
-      const newNode = new TreeNode(val);
-      this.setLeft(newNode);
-
-      return newNode;
-    }
-
-    if (val > this.val) {
-      if (this.right) {
-        return this.right.insert(val);
-      }
-
-      const newNode = new TreeNode(val, this.compareFunction);
-      this.setRight(newNode);
-
-      return newNode;
-    }
-
-    return this;
-  }
-
-  find(val) {
-    if (this.val == val) {
-      return this;
-    }
-
-    if (val < this.val && this.left) {
-      return this.left.find(val);
-    }
-
-    if (val > this.val && this.right) {
-      return this.right.find(val);
-    }
-
-    return null;
-  }
-
-  contains(val) {
-    return this.find(val) != null;
-  }
-
-  remove(val) {
-    const nodeToRemove = this.find(val);
-
-    if (!nodeToRemove) {
-      return false;
-    }
-
-    const parent = nodeToRemove.parent;
-
-    if (!nodeToRemove.left && !nodeToRemove.right) {
-      if (parent) {
-        parent.removeChild(nodeToRemove);
+        return this.left.find(k);
       } else {
-        nodeToRemove.val = null;
-      }
-    } else if (nodeToRemove.left && nodeToRemove.right) {
-      const nextBiggerNode = nodeToRemove.right.findMin();
-      if (nextBiggerNode == nodeToRemove.right) {
-        this.remove(nextBiggerNode.val);
-        nodeToRemove.val = nextBiggerNode.val;
-      } else {
-        nodeToRemove.val = nodeToRemove.right.val;
-        nodeToRemove.setRight(nodeToRemove.right.right);
+        return null;
       }
     } else {
-      const childNode = nodeToRemove.left || nodeToRemove.right;
-
-      if (parent) {
-        parent.replaceChild(nodeToRemove, childNode);
+      if (this.right) {
+        return this.right.find(k);
       } else {
-        childNode.val = nodeToRemove.val;
-        childNode.setLeft(sourceNode.left);
-        childNode.setRight(sourceNode.right);
+        return null;
       }
     }
+  }
+      
+  findMin() {
+    let cur = this;
 
-    nodeToRemove.parent = null;
+    while (cur.left) {
+      cur = cur.left;
+    }
 
-    return true;
+    return cur;
+  }
+
+  nextLarger() {
+    if (this.right) 
+      return this.right.findMin()
+   
+    let cur = this;
+
+    while (cur.parent && cur == cur.parent.right) {
+      cur = cur.parent;
+    }
+    
+    if (cur.parent) {
+      return cur.parent;
+    } else {
+      return null;
+    }
+  }
+
+  insert(node) {
+    if (node == null) return;
+
+    if (node.key < this.key) {
+      if (this.left) {
+        this.left.insert(node)
+      } else {
+        node.parent = this
+        this.left = node
+      }
+    } else {
+      if (this.right) {
+        this.right.insert(node)
+      } else {
+        node.parent = this
+        this.right = node
+      }
+    }
+  }
+  
+  delete() {
+    if (!this.left || !this.right) {
+      if (this == this.parent.left) {
+        this.parent.left = this.left || this.right;
+       
+        if (this.parent.left) {
+          this.parent.left.parent = this.parent;     
+        }                                          
+      } else {                                       
+        this.parent.right = this.left || this.right;
+        
+        if (this.parent.right) {
+          this.parent.right.parent = this.parent;
+        }
+      }
+        
+      return this;
+    } else {
+      let s = this.nextLarger();
+      [this.key, s.key] = [s.key, this.key];
+      return s.delete();
+    }
+  }     
+
+  findAtLeast(k) {
+    let cur = this;
+    let ans = null;
+    
+    while (cur) {
+      if (cur.key == k) {
+        return cur;
+      } else if (cur.key < k) {
+        cur = cur.right;
+      } else if (cur.key > k) {
+        ans = cur;
+        cur = cur.left;
+      }
+    }
+    
+    return ans;
+  }
+
+  findAtMost(k) {
+    let cur = this;
+    let ans = null;
+    
+    while (cur) {
+      if (cur.key == k) {
+        return cur;
+      } else if (cur.key < k) {
+        ans = cur;
+        cur = cur.right;
+      } else if (cur.key > k) {
+        cur = cur.left;
+      }
+    }
+    
+    return ans;
   }
 }
 
 class BinarySearchTree {
   constructor() {
-    this.root = new TreeNode();
+    this.root = null;
   }
 
-  insert(val) {
-    return this.root.insert(val);
+  find(k) {
+    return this.root && this.root.find(k);
   }
 
-  contains(val) {
-    return this.root.contains(val);
+  findMin() {
+    return this.root && this.root.findMin();
+  }
+      
+  insert(k) {
+    const node = new TreeNode(null, k);
+
+    if (this.root == null) {
+      this.root = node;
+    } else {
+      this.root.insert(node);
+    }
+
+    return node;
   }
 
-  remove(val) {
-    return this.root.remove(val);
+  delete(k) {
+    const node = this.find(k);
+    if (node == null) return null;
+    
+    if (node == this.root) {
+      const pseudoroot = new TreeNode(null, 0);
+      pseudoroot.left = this.root;
+      this.root.parent = pseudoroot;
+      
+      const deleted = this.root.delete();
+      this.root = pseudoroot.left;
+
+      if (this.root) {
+        this.root.parent = null;
+      }
+
+      return deleted;
+    } else {
+      return node.delete(); 
+    }
+  }
+
+  nextLarger(k) {
+    const node = this.find(k);
+    return node && node.nextLarger();    
+  } 
+
+  findAtLeast(k) {
+    if (this.root == null) return null;
+    return this.root.findAtLeast(k);
+  }
+
+  findAtMost(k) {
+    if (this.root == null) return null;
+    return this.root.findAtMost(k);
+  }
+
+  deleteAtLeast(k) {
+    const node = this.findAtLeast(k);
+
+    if (node) {
+      return this.delete(node.key);
+    }
+
+    return null;
+  }
+
+  deleteAtMost(k) {
+    const node = this.findAtMost(k);
+
+    if (node) {
+      return this.delete(node.key);
+    }
+
+    return null;
   }
 }
