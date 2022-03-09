@@ -1,4 +1,4 @@
-class DSU {
+class DisjointSetUnion {
   constructor() {
     this.par = new Map();
     this.rank = new Map();
