@@ -172,11 +172,11 @@ class DoublyLinkedList {
     const deletedHead = this.head;
 
     if (this.head === this.tail) {
-      this.head = this.head.next;
-      this.head.prev = null;
-    } else {
       this.head = null;
       this.tail = null;
+    } else {
+      this.head = this.head.next;
+      this.head.prev = null;
     }
 
     return deletedHead.val;
