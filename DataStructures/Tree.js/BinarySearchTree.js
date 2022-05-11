@@ -1,4 +1,4 @@
-class TreeNode {
+class BSTNode {
   constructor(parent, k) {
     this.key = k
     this.parent = parent;
@@ -132,9 +132,72 @@ class TreeNode {
   }
 }
 
+class MinBSTNode extends BSTNode {
+  findMin() {
+    return this.min;
+  }
+  
+  insert(node) {
+    if (node == null) return;
+
+    if (node.key < this.key) {
+      if (node.key < this.min.key) {
+        this.min = node;
+        
+        if (this.left == null) {
+          node.parent = this;
+          this.left = node;
+        } else {
+          this.left.insert(node);
+        }
+      }
+    } else {
+      if (this.right == null) {
+        node.parent = this;
+        this.right = node;
+      } else {
+        this.right.insert(node);
+      }
+    }
+  }
+
+  delete(this) {
+    if (this.left == null || this.right == null) {
+      if (this == this.parent.left) {
+        this.parent.left = this.left || this.right;
+        
+        if (this.parent.left != null) {
+          this.parent.left.parent = this.parent;
+          this.parent.min = this.parent.left.min;
+        } else { 
+          this.parent.min = this.parent;
+          let cur  = this.parent;
+
+          while (cur.parent != null && cur == cur.parent.left) {
+            cur.parent.min = cur.min;
+            cur = cur.parent;
+          }
+        }
+      } else {
+        this.parent.right = this.left || this.right;
+
+        if (this.parent.right != null) {
+          this.parent.right.parent = this.parent;
+        }
+      }
+      return this;
+    } else {
+      const s = this.getNextLarger();
+      [this.key, s.key] = [s.key, this.key];
+      return s.delete();
+    }
+  }
+}
+
 class BinarySearchTree {
-  constructor() {
+  constructor(isAugmented = false) {
     this.root = null;
+    this.TreeNode = isAugmented ? MinBSTNode : BSTNode;
   }
 
   find(k) {
@@ -146,7 +209,7 @@ class BinarySearchTree {
   }
       
   insert(k) {
-    const node = new TreeNode(null, k);
+    const node = new this.TreeNode(null, k);
 
     if (this.root == null) {
       this.root = node;
@@ -162,7 +225,7 @@ class BinarySearchTree {
     if (node == null) return null;
     
     if (node == this.root) {
-      const pseudoroot = new TreeNode(null, 0);
+      const pseudoroot = new this.TreeNode(null, 0);
       pseudoroot.left = this.root;
       this.root.parent = pseudoroot;
       
