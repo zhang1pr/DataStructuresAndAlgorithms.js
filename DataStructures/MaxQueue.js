@@ -62,7 +62,7 @@ class Deque {
     return this;
   }
 
-  deletedTail() {
+  deleteTail() {
     if (!this.tail) {
       return null;
     }
@@ -97,11 +97,11 @@ class MaxQueue {
   enqueue(val) {
     let count = 1;
     while (!this.deque.isEmpty() && val > this.deque.peekTail()[0]) {
-      const item = this.deque.pop();
+      const item = this.deque.deleteTail();
       count += item[1];  
     } 
      
-    this.deque.enqueue([val, cnt]);  
+    this.deque.enqueue([val, count]);  
   }
 
   dequeue() {
