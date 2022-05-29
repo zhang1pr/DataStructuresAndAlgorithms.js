@@ -161,7 +161,7 @@ class MinBSTNode extends BSTNode {
     }
   }
 
-  delete(this) {
+  delete() {
     if (this.left == null || this.right == null) {
       if (this == this.parent.left) {
         this.parent.left = this.left || this.right;
