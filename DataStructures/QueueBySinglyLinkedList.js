@@ -1,50 +1,50 @@
-class StackNode {
+class ListNode {
   constructor(val, next = null) {
     this.val = val;
     this.next = next;
-  }
+  }  
 }
 
-class StackBySinglyLinkedList {
+class QueueBySinglyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
-    this.size = 0;
+    this.sz = 0;
   }
 
   isEmpty() {
-    return this.size == 0;
+    return this.head == null;
+  }
+
+  size() {
+    return this.sz;
   }
 
   peek() {
+    return this.head;   
+  }  
+    
+  enqueue(val) {
+    const newNode = new ListNode(val);
+    this.sz++;
+
     if (!this.head) {
-      return null;
-    }
-
-    return this.head.val;
-  }
-
-  push(val) {
-    this.size++;
-
-    const newNode = new StackNode(val, this.head);
-
-    if (!this.tail) {
+      this.head = newNode;
       this.tail = newNode;
-      this.head = newNode;
     } else {
-      this.head = newNode;
+      this.tail.next = newNode;
+      this.tail = newNode;  
     }
 
-    return this;
+    return this; 
   }
 
-  pop() {
+  dequeue() {    
     if (!this.head) {
       return null;
     }
 
-    this.size--;
+    this.sz--;
 
     const deletedHead = this.head;
 
@@ -55,6 +55,6 @@ class StackBySinglyLinkedList {
       this.tail = null;
     }
 
-    return deletedHead.val;
+    return deletedHead;
   }
 }
