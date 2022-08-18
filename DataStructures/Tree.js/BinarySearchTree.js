@@ -34,6 +34,16 @@ class BSTNode {
     return cur;
   }
 
+  findMax() {
+    let cur = this;
+
+    while (cur.right) {
+      cur = cur.right;
+    }
+
+    return cur;
+  }
+
   nextLarger() {
     if (this.right) 
       return this.right.findMin()
@@ -41,6 +51,23 @@ class BSTNode {
     let cur = this;
 
     while (cur.parent && cur == cur.parent.right) {
+      cur = cur.parent;
+    }
+    
+    if (cur.parent) {
+      return cur.parent;
+    } else {
+      return null;
+    }
+  }
+
+  lastSmaller() {
+    if (this.left) 
+      return this.left.findMax()
+   
+    let cur = this;
+
+    while (cur.parent && cur == cur.parent.left) {
       cur = cur.parent;
     }
     
@@ -187,7 +214,7 @@ class MinBSTNode extends BSTNode {
       }
       return this;
     } else {
-      const s = this.getNextLarger();
+      const s = this.nextLarger();
       [this.key, s.key] = [s.key, this.key];
       return s.delete();
     }
@@ -207,7 +234,21 @@ class BinarySearchTree {
   findMin() {
     return this.root && this.root.findMin();
   }
+
+  findMax() {
+    return this.root && this.root.findMax();
+  }
       
+  nextLarger(k) {
+    const node = this.find(k);
+    return node && node.nextLarger();    
+  } 
+
+  lastSmaller(k) {
+    const node = this.find(k);
+    return node && node.lastSmaller();    
+  } 
+
   insert(k) {
     const node = new this.TreeNode(null, k);
 
@@ -241,11 +282,6 @@ class BinarySearchTree {
       return node.delete(); 
     }
   }
-
-  nextLarger(k) {
-    const node = this.find(k);
-    return node && node.nextLarger();    
-  } 
 
   findAtLeast(k) {
     if (this.root == null) return null;

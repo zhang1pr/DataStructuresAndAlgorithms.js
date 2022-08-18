@@ -1,22 +1,30 @@
-class TreeNode {
+class BSTNode {
   constructor() {
-
+    
   }
 
   find(k) {
-
+    
   }
       
   findMin() {
+   
+  }
+
+  findMax() {
     
   }
 
   nextLarger() {
+    
+  }
 
+  lastSmaller() {
+    
   }
 
   insert(node) {
-
+    
   }
   
   delete() {
@@ -24,7 +32,7 @@ class TreeNode {
   }     
 
   findAtLeast(k) {
-   
+    
   }
 
   findAtMost(k) {
@@ -32,9 +40,23 @@ class TreeNode {
   }
 }
 
+class MinBSTNode extends BSTNode {
+  findMin() {
+
+  }
+  
+  insert(node) {
+    
+  }
+
+  delete() {
+   
+  }
+}
+
 class BinarySearchTree {
   constructor() {
-
+  
   }
 
   find(k) {
@@ -44,25 +66,33 @@ class BinarySearchTree {
   findMin() {
 
   }
-      
-  insert(k) {
 
+  findMax() {
+
+  }
+      
+  nextLarger(k) {
+  
+  } 
+
+  lastSmaller(k) {
+
+  } 
+
+  insert(k) {
+    
   }
 
   delete(k) {
-
+    
   }
 
-  nextLarger(k) {
-    
-  } 
-
   findAtLeast(k) {
-    
+  
   }
 
   findAtMost(k) {
-    
+
   }
 
   deleteAtLeast(k) {
@@ -70,6 +100,6 @@ class BinarySearchTree {
   }
 
   deleteAtMost(k) {
-  
+    
   }
 }
