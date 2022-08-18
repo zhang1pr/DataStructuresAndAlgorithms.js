@@ -1,95 +1,111 @@
-class TreeNode {
+class AVLNode {
   constructor() {
 
   }
 
-  get leftHeight() {
+  find(k) {
 
   }
-
-  get rightHeight() {
-
-  }
-
-  get height() {
-    
-  }
-
-  get balanceFactor() {
-
-  }
-  
-  get uncle() {
-
-  }
-
-  setLeft(node) {
       
-  }
-
-  setRight(node) {
-    
-  }
-
   findMin() {
     
   }
+
+  findMax() {
+    
+  }
+
+  nextLarger() {
+    
+  }
+
+  lastSmaller() {
+    
+  }
+
+  insert(node) {
+    
+  }
   
-  replaceChild(nodeToReplace, replacementNode) {
-
-  }
-
-  insert(val) {
-    
-  }
-
-  find(val) {
-    
-  }
-
-  contains(val) {
-
-  }
-
-  remove(val) {
+  delete() {
    
+  }     
+
+  findAtLeast(k) {
+    
+  }
+
+  findAtMost(k) {
+
   }
 }
 
-class AVlTree {
+class AVLTree {
   constructor() {
+    
+  }
+  
+  static getHeight(node) {
+    
+  }
+      
+  static updateHeight(node) {
 
   }
 
-  insert(val) {
+  find(k) {
 
   }
 
-  contains(val) {
-    return this.root.contains(val);
-  }
-
-  remove(val) {
+  findMin() {
 
   }
 
-  balance(node) {
+  findMax() {
+
+  }
+      
+  nextLarger(k) {
+   
+  } 
+
+  lastSmaller(k) {
+      
+  } 
+
+  insert(k) {
     
   }
 
-  rotateLeftLeft(rootNode) {
-
-  }
-
-  rotateLeftRight(rootNode) {
-
-  }
-
-  rotateRightLeft(rootNode) {
+  delete(k) {
     
   }
 
-  rotateRightRight(rootNode) {
+  findAtLeast(k) {
+
+  }
+
+  findAtMost(k) {
+   
+  }
+
+  deleteAtLeast(k) {
+
+  }
+
+  deleteAtMost(k) {
     
+  }
+
+  leftRotate(x) {
+    
+  }
+       
+  rightRotate(x) {
+    
+  }
+  
+  rebalance(node) {
+   
   }
 }

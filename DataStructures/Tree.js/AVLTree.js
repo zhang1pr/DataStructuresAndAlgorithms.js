@@ -1,310 +1,343 @@
-class TreeNode {
-  constructor(val = null) {
-    this.val = val;
+class AVLNode {
+  constructor(parent, k) {
+    this.key = k;
+    this.parent = parent;
     this.left = null;
     this.right = null;
-    this.parent = null;
   }
 
-  get leftHeight() {
-    if (!this.left) {
-      return 0;
+  find(k) {
+    if (k == this.key) return this;
+    
+    if (k < this.key) {
+      if (this.left) {
+        return this.left.find(k);
+      } else {
+        return null;
+      }
+    } else {
+      if (this.right) {
+        return this.right.find(k);
+      } else {
+        return null;
+      }
+    }
+  }
+      
+  findMin() {
+    let cur = this;
+
+    while (cur.left) {
+      cur = cur.left;
     }
 
-    return this.left.height + 1;
+    return cur;
   }
 
-  get rightHeight() {
-    if (!this.right) {
-      return 0;
+  findMax() {
+    let cur = this;
+
+    while (cur.right) {
+      cur = cur.right;
     }
 
-    return this.right.height + 1;
+    return cur;
   }
 
-  get height() {
-    return Math.max(this.leftHeight, this.rightHeight);
-  }
+  nextLarger() {
+    if (this.right) 
+      return this.right.findMin()
+   
+    let cur = this;
 
-  get balanceFactor() {
-    return this.leftHeight - this.rightHeight;
-  }
-  
-  get uncle() {
-    if (!this.parent || !this.parent.parent || !this.parent.parent.left || !this.parent.parent.right) {
+    while (cur.parent && cur == cur.parent.right) {
+      cur = cur.parent;
+    }
+    
+    if (cur.parent) {
+      return cur.parent;
+    } else {
       return null;
     }
-
-    if (this.parent == this.parent.parent.left) {
-      return this.parent.parent.right;
-    }
-
-    return this.parent.parent.left;
   }
 
-  setLeft(node) {
-    if (this.left) {
-      this.left.parent = null;
+  lastSmaller() {
+    if (this.left) 
+      return this.left.findMax()
+   
+    let cur = this;
+
+    while (cur.parent && cur == cur.parent.left) {
+      cur = cur.parent;
     }
-
-    this.left = node;
-
-    if (this.left) {
-      this.left.parent = this;
+    
+    if (cur.parent) {
+      return cur.parent;
+    } else {
+      return null;
     }
-
-    return this;
   }
 
-  setRight(node) {
-    if (this.right) {
-      this.right.parent = null;
+  insert(node) {
+    if (node == null) return;
+
+    if (node.key < this.key) {
+      if (this.left) {
+        this.left.insert(node)
+      } else {
+        node.parent = this;
+        this.left = node
+      }
+    } else {
+      if (this.right) {
+        this.right.insert(node)
+      } else {
+        node.parent = this;
+        this.right = node
+      }
     }
+  }
+  
+  delete() {
+    if (!this.left || !this.right) {
+      if (this == this.parent.left) {
+        this.parent.left = this.left || this.right;
+       
+        if (this.parent.left) {
+          this.parent.left.parent = this.parent;     
+        }                                          
+      } else {                                       
+        this.parent.right = this.left || this.right;
+        
+        if (this.parent.right) {
+          this.parent.right.parent = this.parent;
+        }
+      }
+        
+      return this;
+    } else {
+      let s = this.nextLarger();
+      [this.key, s.key] = [s.key, this.key];
+      return s.delete();
+    }
+  }     
 
-    this.right = node;
+  findAtLeast(k) {
+    let cur = this;
+    let ans = null;
+    
+    while (cur) {
+      if (cur.key == k) {
+        return cur;
+      } else if (cur.key < k) {
+        cur = cur.right;
+      } else if (cur.key > k) {
+        ans = cur;
+        cur = cur.left;
+      }
+    }
+    
+    return ans;
+  }
 
+  findAtMost(k) {
+    let cur = this;
+    let ans = null;
+    
+    while (cur) {
+      if (cur.key == k) {
+        return cur;
+      } else if (cur.key < k) {
+        ans = cur;
+        cur = cur.right;
+      } else if (cur.key > k) {
+        cur = cur.left;
+      }
+    }
+    
+    return ans;
+  }
+}
+
+class AVLTree {
+  constructor() {
+    this.root = null;
+    this.TreeNode = AVLNode;
+  }
+  
+  static getHeight(node) {
     if (node) {
-      this.right.parent = this;
+      return node.height;
     }
 
-    return this;
+    return -1;
+  }
+      
+  static updateHeight(node) {
+    node.height = Math.max(AVLTree.getHeight(node.left) || 0, AVLTree.getHeight(node.right) || 0) + 1;
+  }
+
+  find(k) {
+    return this.root && this.root.find(k);
   }
 
   findMin() {
-    if (!this.left) {
-      return this;
-    }
-
-    return this.left.findMin();
-  }
-  
-  replaceChild(nodeToReplace, replacementNode) {
-    if (!nodeToReplace || !replacementNode) {
-      return false;
-    }
-
-    if (this.left && this.left == nodeToReplace) {
-      this.left = replacementNode;
-      return true;
-    }
-
-    if (this.right && this.right == nodeToReplace) {
-      this.right = replacementNode;
-      return true;
-    }
-
-    return false;
+    return this.root && this.root.findMin();
   }
 
-  insert(val) {
-    if (this.val == null) {
-      this.val = val;
+  findMax() {
+    return this.root && this.root.findMax();
+  }
+      
+  nextLarger(k) {
+    const node = this.find(k);
+    return node && node.nextLarger();    
+  } 
 
-      return this;
+  lastSmaller(k) {
+    const node = this.find(k);
+    return node && node.lastSmaller();    
+  } 
+
+  insert(k) {
+    const node = new this.TreeNode(null, k);
+
+    if (this.root == null) {
+      this.root = node;
+    } else {
+      this.root.insert(node);
     }
 
-    if (val < this.val) {
-      if (this.left) {
-        return this.left.insert(val);
+    this.rebalance(node);
+    return node;
+  }
+
+  delete(k) {
+    const node = this.find(k);
+    if (node == null) return null;
+    
+    let deletedNode;
+    if (node == this.root) {
+      const pseudoroot = new this.TreeNode(null, 0);
+      pseudoroot.left = this.root;
+      this.root.parent = pseudoroot;
+      
+      const deleted = this.root.delete();
+      this.root = pseudoroot.left;
+
+      if (this.root) {
+        this.root.parent = null;
       }
 
-      const newNode = new TreeNode(val);
-      this.setLeft(newNode);
-
-      return newNode;
+      deletedNode = deleted;
+    } else {
+      deletedNode = node.delete(); 
     }
 
-    if (val > this.val) {
-      if (this.right) {
-        return this.right.insert(val);
-      }
+    this.rebalance(deletedNode.parent);
 
-      const newNode = new TreeNode(val, this.compareFunction);
-      this.setRight(newNode);
-
-      return newNode;
-    }
-
-    return this;
+    return deletedNode;
   }
 
-  find(val) {
-    if (this.val == val) {
-      return this;
-    }
+  findAtLeast(k) {
+    if (this.root == null) return null;
+    return this.root.findAtLeast(k);
+  }
 
-    if (val < this.val && this.left) {
-      return this.left.find(val);
-    }
+  findAtMost(k) {
+    if (this.root == null) return null;
+    return this.root.findAtMost(k);
+  }
 
-    if (val > this.val && this.right) {
-      return this.right.find(val);
+  deleteAtLeast(k) {
+    const node = this.findAtLeast(k);
+
+    if (node) {
+      return this.delete(node.key);
     }
 
     return null;
   }
 
-  contains(val) {
-    return this.find(val) != null;
-  }
+  deleteAtMost(k) {
+    const node = this.findAtMost(k);
 
-  remove(val) {
-    const nodeToRemove = this.find(val);
-
-    if (!nodeToRemove) {
-      return false;
+    if (node) {
+      return this.delete(node.key);
     }
 
-    const parent = nodeToRemove.parent;
+    return null;
+  }
 
-    if (!nodeToRemove.left && !nodeToRemove.right) {
-      if (parent) {
-        parent.removeChild(nodeToRemove);
-      } else {
-        nodeToRemove.val = null;
-      }
-    } else if (nodeToRemove.left && nodeToRemove.right) {
-      const nextBiggerNode = nodeToRemove.right.findMin();
-      if (nextBiggerNode == nodeToRemove.right) {
-        this.remove(nextBiggerNode.val);
-        nodeToRemove.val = nextBiggerNode.val;
-      } else {
-        nodeToRemove.val = nodeToRemove.right.val;
-        nodeToRemove.setRight(nodeToRemove.right.right);
+  leftRotate(x) {
+    let y = x.right;
+    y.parent = x.parent;
+    if (y.parent) {
+      if (y.parent.left == x) {
+        y.parent.left = y;
+      } else if (y.parent.right == x) {
+        y.parent.right = y;
       }
     } else {
-      const childNode = nodeToRemove.left || nodeToRemove.right;
+      this.root = y;
+    }
 
-      if (parent) {
-        parent.replaceChild(nodeToRemove, childNode);
-      } else {
-        childNode.val = nodeToRemove.val;
-        childNode.setLeft(sourceNode.left);
-        childNode.setRight(sourceNode.right);
+    x.right = y.left;
+    if (x.right) {
+      x.right.parent = x;
+    }
+
+    y.left = x
+    x.parent = y
+    AVLTree.updateHeight(x);
+    AVLTree.updateHeight(y);
+  }
+       
+  rightRotate(x) {
+    let y = x.left;
+    y.parent = x.parent;
+    if (y.parent) {
+      if (y.parent.left == x) {
+        y.parent.left = y;
+      } else if (y.parent.right == x) {
+        y.parent.right = y;
       }
+    } else { 
+        this.root = y
     }
 
-    nodeToRemove.parent = null;
-
-    return true;
-  }
-}
-
-class AVlTree {
-  constructor() {
-    this.root = new TreeNode();
-  }
-
-  insert(val) {
-    const node = this.root.insert(val);
-
-    let currentNode = this.root.find(val);
-
-    while (currentNode) {
-      this.balance(currentNode);
-      currentNode = currentNode.parent;
+    x.left = y.right;
+    if (x.left) {
+      x.left.parent = x;
     }
 
-    return node;
+    y.right = x;
+    x.parent = y;
+    AVLTree.updateHeight(x);
+    AVLTree.updateHeight(y);
   }
+  
+  rebalance(node) {
+    while (node) {
+      AVLTree.updateHeight(node);
 
-  contains(val) {
-    return this.root.contains(val);
-  }
-
-  remove(val) {
-    const node = this.root.remove(val);
-
-    this.balance(this.root);
-
-    return node;
-  }
-
-  balance(node) {
-    if (node.balanceFactor > 1) {
-      if (node.left.balanceFactor > 0) {
-        this.rotateLeftLeft(node);
-      } else if (node.left.balanceFactor < 0) {
-        this.rotateLeftRight(node);
+      if (AVLTree.getHeight(node.left) >= 2 + AVLTree.getHeight(node.right)) {
+        if (AVLTree.getHeight(node.left.left) >= AVLTree.getHeight(node.left.right)) {
+          this.rightRotate(node);
+        } else {
+          this.leftRotate(node.left);
+          this.rightRotate(node);
+        }
+      } else if (AVLTree.getHeight(node.right) >= 2 + AVLTree.getHeight(node.left)) {
+        if (AVLTree.getHeight(node.right.right) >= AVLTree.getHeight(node.right.left)) {
+          this.leftRotate(node);
+        } else {
+          this.rightRotate(node.right);
+          this.leftRotate(node);
+        }
       }
-    } else if (node.balanceFactor < -1) {
-      if (node.right.balanceFactor < 0) {
-        this.rotateRightRight(node);
-      } else if (node.right.balanceFactor > 0) {
-        this.rotateRightLeft(node);
-      }
+        
+      node = node.parent;
     }
-  }
-
-  rotateLeftLeft(rootNode) {
-    const leftNode = rootNode.left;
-    rootNode.setLeft(null);
-
-    if (rootNode.parent) {
-      rootNode.parent.setLeft(leftNode);
-    } else if (rootNode === this.root) {
-      this.root = leftNode;
-    }
-
-    if (leftNode.right) {
-      rootNode.setLeft(leftNode.right);
-    }
-
-    leftNode.setRight(rootNode);
-  }
-
-  rotateLeftRight(rootNode) {
-    const leftNode = rootNode.left;
-    rootNode.setLeft(null);
-
-    const leftRightNode = leftNode.right;
-    leftNode.setRight(null);
-
-    if (leftRightNode.left) {
-      leftNode.setRight(leftRightNode.left);
-      leftRightNode.setLeft(null);
-    }
-
-    rootNode.setLeft(leftRightNode);
-
-    leftRightNode.setLeft(leftNode);
-
-    this.rotateLeftLeft(rootNode);
-  }
-
-  rotateRightLeft(rootNode) {
-    const rightNode = rootNode.right;
-    rootNode.setRight(null);
-
-    const rightLeftNode = rightNode.left;
-    rightNode.setLeft(null);
-
-    if (rightLeftNode.right) {
-      rightNode.setLeft(rightLeftNode.right);
-      rightLeftNode.setRight(null);
-    }
-
-    rootNode.setRight(rightLeftNode);
-
-    rightLeftNode.setRight(rightNode);
-
-    this.rotateRightRight(rootNode);
-  }
-
-  rotateRightRight(rootNode) {
-    const rightNode = rootNode.right;
-    rootNode.setRight(null);
-
-    if (rootNode.parent) {
-      rootNode.parent.setRight(rightNode);
-    } else if (rootNode === this.root) {
-      this.root = rightNode;
-    }
-
-    if (rightNode.left) {
-      rootNode.setRight(rightNode.left);
-    }
-
-    rightNode.setLeft(rootNode);
   }
 }
