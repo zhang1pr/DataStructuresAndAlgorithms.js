@@ -55,7 +55,7 @@ class MaxQueue {
 
   } 
   
-  max() {
+  getMax() {
 
   }  
 }
