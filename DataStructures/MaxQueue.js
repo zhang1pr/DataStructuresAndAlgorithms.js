@@ -118,7 +118,7 @@ class MaxQueue {
     return this.deque.isEmpty();  
   } 
   
-  getMax() {
+  peek() {
     return !this.deque.isEmpty() ? this.deque.peekHead()[0] : null;
   }  
 }
