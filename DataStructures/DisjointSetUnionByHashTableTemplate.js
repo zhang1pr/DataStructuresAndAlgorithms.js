@@ -15,7 +15,7 @@ class DisjointSetUnion {
   
   }  
 
-  inSameSet(x, y) {
+  areInSameSet(x, y) {
     
   }
 }  

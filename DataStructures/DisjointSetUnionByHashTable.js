@@ -40,7 +40,7 @@ class DisjointSetUnion {
     return this.sz.get(this.find(x));  
   }  
 
-  inSameSet(x, y) {
+  areInSameSet(x, y) {
     return this.find(x) == this.find(y);
   }
 }  
