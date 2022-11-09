@@ -35,7 +35,11 @@ class DynamicHeap {
   }
 
   isEmpty() {
-    return this.array.length == 0;
+    return this.size() == 0;
+  }
+
+  size() {
+    return this.array.length;
   }
 
   heapifyUp(childIndex) {

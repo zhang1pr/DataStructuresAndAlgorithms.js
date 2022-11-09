@@ -18,7 +18,11 @@ class DynamicHeap {
   isEmpty() {
     
   }
-
+  
+  size() {
+  
+  }
+  
   heapifyUp(childIndex) {
 
   }
