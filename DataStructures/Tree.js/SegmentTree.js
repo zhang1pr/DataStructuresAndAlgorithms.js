@@ -45,30 +45,34 @@ class SegmentTree {
   }
 
   update(arrayIndex, value) {
-    this.updateRange(0, 0, this.array.length-1, arrayIndex, value);
+    this.updateTreeRange(0, 0, this.array.length-1, arrayIndex, value);
   }
 
-  updateRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
+  updateTreeRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
     if (leftIndex == rightIndex) {
       this.tree[treePos] = value;
     } else {
       const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
       
       if (arrayIndex <= middleIndex) {
-        this.updateRange(treePos * 2 + 1, leftIndex, middleIndex, arrayIndex, value);
+        this.updateTreeRange(treePos * 2 + 1, leftIndex, middleIndex, arrayIndex, value);
       } else {
-        this.updateRange(treePos * 2 + 2, middleIndex + 1, rightIndex, arrayIndex, value);
+        this.updateTreeRange(treePos * 2 + 2, middleIndex + 1, rightIndex, arrayIndex, value);
       }
 
       this.tree[treePos] = this.operation(this.tree[treePos * 2 + 1], this.tree[treePos * 2 + 2]);
     }
   }
 
-  query(queryLeftIndex, queryRightIndex) {
-    return this.queryRange(queryLeftIndex, queryRightIndex, 0, this.array.length - 1, 0);
+  query(queryIndex) {
+    return this.queryRange(0, queryIndex);
   }
 
-  queryRange(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, treePos) {
+  queryRange(queryLeftIndex, queryRightIndex) {
+    return this.queryTreeRange(queryLeftIndex, queryRightIndex, 0, this.array.length - 1, 0);
+  }
+
+  queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, treePos) {
     if (queryLeftIndex <= leftIndex && queryRightIndex >= rightIndex) {
       return this.tree[treePos];
     }
@@ -79,8 +83,8 @@ class SegmentTree {
 
     const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
 
-    const leftResult = this.queryRange(queryLeftIndex, queryRightIndex, leftIndex, middleIndex, treePos * 2 + 1);
-    const rightResult = this.queryRange(queryLeftIndex, queryRightIndex, middleIndex + 1, rightIndex, treePos * 2 + 2);
+    const leftResult = this.queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, middleIndex, treePos * 2 + 1);
+    const rightResult = this.queryTreeRange(queryLeftIndex, queryRightIndex, middleIndex + 1, rightIndex, treePos * 2 + 2);
 
     return this.operation(leftResult, rightResult);
   }

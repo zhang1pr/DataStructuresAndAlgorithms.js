@@ -15,11 +15,23 @@ class SegmentTree {
 
   }
 
-  rangeQuery(leftIndex, rightIndex) {
+  update(arrayIndex, value) {
 
   }
 
-  query(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, position) {
+  updateTreeRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
+
+  }
+
+  query(queryIndex) {
+
+  }
+
+  queryRange(leftIndex, rightIndex) {
+
+  }
+
+  queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, position) {
 
   }
 }
