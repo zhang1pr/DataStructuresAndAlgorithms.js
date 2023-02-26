@@ -47,7 +47,7 @@ class TrieNode {
 
 class Trie {
   constructor() {
-    this.head = new TrieNode('*');
+    this.head = new TrieNode();
   }
 
   addWord(word) {
