@@ -1,4 +1,4 @@
-class Node {
+class ListNode {
   constructor(val, next = null, prev = null) {
     this.val = val;
     this.next = next;
@@ -17,7 +17,7 @@ class Deque {
   }  
    
   enqueue(val) {
-    const newNode = new Node(val, null, this.tail);
+    const newNode = new ListNode(val, null, this.tail);
 
     if (!this.head) {
       this.head = newNode;
