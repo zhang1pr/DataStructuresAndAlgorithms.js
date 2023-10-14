@@ -6,33 +6,33 @@ class AVLNode {
   find(k) {
 
   }
-      
+
   findMin() {
-    
+
   }
 
   findMax() {
-    
+
   }
 
   nextLarger() {
-    
+
   }
 
   lastSmaller() {
-    
+
   }
 
   insert(node) {
-    
+
   }
-  
+
   delete() {
-   
-  }     
+
+  }
 
   findAtLeast(k) {
-    
+
   }
 
   findAtMost(k) {
@@ -42,13 +42,13 @@ class AVLNode {
 
 class AVLTree {
   constructor() {
-    
+
   }
-  
+
   static getHeight(node) {
-    
+
   }
-      
+
   static updateHeight(node) {
 
   }
@@ -64,21 +64,21 @@ class AVLTree {
   findMax() {
 
   }
-      
+
   nextLarger(k) {
-   
-  } 
+
+  }
 
   lastSmaller(k) {
-      
-  } 
+
+  }
 
   insert(k) {
-    
+
   }
 
   delete(k) {
-    
+
   }
 
   findAtLeast(k) {
@@ -86,7 +86,7 @@ class AVLTree {
   }
 
   findAtMost(k) {
-   
+
   }
 
   deleteAtLeast(k) {
@@ -94,18 +94,18 @@ class AVLTree {
   }
 
   deleteAtMost(k) {
-    
+
   }
 
   leftRotate(x) {
-    
+
   }
-       
+
   rightRotate(x) {
-    
+
   }
-  
+
   rebalance(node) {
-   
+
   }
 }

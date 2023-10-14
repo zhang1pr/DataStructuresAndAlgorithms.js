@@ -135,7 +135,7 @@ class DoublyLinkedList {
       if (currentNode.val == val) {
         return currentNode;
       }
-      
+
       currentNode = currentNode.next;
     }
 
@@ -157,7 +157,7 @@ class DoublyLinkedList {
       if (currentNode.val == val) {
         return currentNode;
       }
-      
+
       currentNode = currentNode.prev;
     }
 
@@ -204,7 +204,7 @@ class DoublyLinkedList {
     let currNode = this.head;
     let prevNode = null;
     let nextNode = null;
- 
+
     while (currNode) {
       nextNode = currNode.next;
       prevNode = currNode.prev;

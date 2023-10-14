@@ -23,24 +23,24 @@ function mergeSort(array) {
         tmp[k] = array[j];
         j++;
       }
-      
+
       k++;
     }
-    
+
     let start = i;
     let end = q;
     if (j <= r) {
       start = j;
       end = r;
     }
-    
+
     while (start <= end) {
       tmp[k] = array[start];
       k++;
       start++;
     }
-    
-    for (i = 0; i <= r-p; i++) {
+
+    for (i = 0; i <= r - p; i++) {
       array[p + i] = tmp[i];
     }
   }

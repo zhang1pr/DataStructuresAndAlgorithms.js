@@ -5,12 +5,12 @@ class StaticHeap {
   }
 
   heapifyUp(childIndex) {
-    let parentIndex = Math.floor((childIndex - 1)/2);
+    let parentIndex = Math.floor((childIndex - 1) / 2);
 
     while (parentIndex >= 0 && !this.checkInvariant(this.array[parentIndex], this.array[childIndex])) {
       [this.array[parentIndex], this.array[childIndex]] = [this.array[childIndex], this.array[parentIndex]];
       childIndex = parentIndex;
-      parentIndex = Math.floor((parentIndex - 1)/2);
+      parentIndex = Math.floor((parentIndex - 1) / 2);
     }
   }
 
@@ -49,7 +49,7 @@ class StaticHeap {
 
   sort() {
     this.buildHeap(this.capacity);
-    
+
     let index = this.capacity - 1;
     while (index > 0) {
       [this.array[index], this.array[0]] = [this.array[0], this.array[index]];

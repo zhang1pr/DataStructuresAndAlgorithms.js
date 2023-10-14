@@ -4,7 +4,7 @@ class TrieNode {
   }
 
   getChild(char) {
-    
+
   }
 
   addChild(char, isEnd = false) {
@@ -20,11 +20,11 @@ class TrieNode {
   }
 
   hasChildren() {
-  
+
   }
 
   getChildren() {
-  
+
   }
 }
 
@@ -50,6 +50,6 @@ class Trie {
   }
 
   getLastCharacterNode(word) {
-    
+
   }
 }

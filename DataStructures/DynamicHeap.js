@@ -43,12 +43,12 @@ class DynamicHeap {
   }
 
   heapifyUp(childIndex) {
-    let parentIndex = Math.floor((childIndex - 1)/2);
+    let parentIndex = Math.floor((childIndex - 1) / 2);
 
     while (parentIndex >= 0 && !this.checkInvariant(this.array[parentIndex], this.array[childIndex])) {
       [this.array[parentIndex], this.array[childIndex]] = [this.array[childIndex], this.array[parentIndex]];
       childIndex = parentIndex;
-      parentIndex = Math.floor((parentIndex - 1)/2);
+      parentIndex = Math.floor((parentIndex - 1) / 2);
     }
   }
 

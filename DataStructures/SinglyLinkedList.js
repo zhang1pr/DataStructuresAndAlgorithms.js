@@ -2,7 +2,7 @@ class ListNode {
   constructor(val, next = null) {
     this.val = val;
     this.next = next;
-  }  
+  }
 }
 
 class SinglyLinkedList {
@@ -32,10 +32,10 @@ class SinglyLinkedList {
       this.tail = newNode;
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;  
+      this.tail = newNode;
     }
 
-    return this; 
+    return this;
   }
 
   deleteSame(val) {
@@ -47,11 +47,11 @@ class SinglyLinkedList {
 
     while (this.head && this.head.val === val) {
       deletedNode = this.head;
-      this.head = this.head.next;  
+      this.head = this.head.next;
     }
 
     let currentNode = this.head;
-    
+
     if (currentNode != null) {
       while (currentNode.next) {
         if (currentNode.next.val === val) {
@@ -115,7 +115,7 @@ class SinglyLinkedList {
     if (this.head === this.tail) {
       this.head = null;
       this.tail = null;
-      
+
       return deletedTail;
     }
 

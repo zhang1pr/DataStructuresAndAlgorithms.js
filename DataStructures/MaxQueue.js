@@ -11,11 +11,11 @@ class Deque {
     this.head = null;
     this.tail = null;
   }
-   
+
   isEmpty() {
-    return this.head == null;  
-  }  
-   
+    return this.head == null;
+  }
+
   enqueue(val) {
     const newNode = new ListNode(val, null, this.tail);
 
@@ -31,7 +31,7 @@ class Deque {
   }
 
   dequeue() {
-     if (!this.head) {
+    if (!this.head) {
       return null;
     }
 
@@ -47,7 +47,7 @@ class Deque {
 
     return deletedHead.val;
   }
-    
+
   addHead(val) {
     const newNode = new ListNode(val, this.head, null);
 
@@ -79,46 +79,46 @@ class Deque {
 
     return deletedTail.val;
   }
-    
+
   peekTail() {
     return this.tail ? this.tail.val : null;
-  }  
-  
+  }
+
   peekHead() {
     return this.head ? this.head.val : null;
-  }    
+  }
 }
 
 class MaxQueue {
   constructor() {
-    this.deque = new Deque(); 
-  } 
-    
+    this.deque = new Deque();
+  }
+
   enqueue(val) {
     let count = 1;
     while (!this.deque.isEmpty() && val > this.deque.peekTail()[0]) {
       const item = this.deque.deleteTail();
-      count += item[1];  
-    } 
-     
-    this.deque.enqueue([val, count]);  
+      count += item[1];
+    }
+
+    this.deque.enqueue([val, count]);
   }
 
   dequeue() {
-     if (this.deque.isEmpty()) return null;
+    if (this.deque.isEmpty()) return null;
 
-     this.deque.peekHead()[1]--;
-      
-     if (this.deque.peekHead()[1] == 0) {
-        this.deque.dequeue();
-     }
-  }  
-    
+    this.deque.peekHead()[1]--;
+
+    if (this.deque.peekHead()[1] == 0) {
+      this.deque.dequeue();
+    }
+  }
+
   isEmpty() {
-    return this.deque.isEmpty();  
-  } 
-  
+    return this.deque.isEmpty();
+  }
+
   peek() {
     return !this.deque.isEmpty() ? this.deque.peekHead()[0] : null;
-  }  
+  }
 }

@@ -1,7 +1,7 @@
 class ListNode {
   constructor() {
 
-  }  
+  }
 }
 
 class SinglyLinkedList {
@@ -10,7 +10,7 @@ class SinglyLinkedList {
   }
 
   prepend(val) {
-    
+
   }
 
   append(val) {
@@ -18,23 +18,23 @@ class SinglyLinkedList {
   }
 
   deleteSame(val) {
-    
+
   }
 
   find(val, callback) {
-    
+
   }
 
   deleteHead() {
-    
+
   }
 
   deleteTail() {
-   
+
   }
 
   reverse() {
-    
+
   }
 
   traverse() {

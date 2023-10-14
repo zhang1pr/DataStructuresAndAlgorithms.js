@@ -18,7 +18,7 @@ class HashTable {
     const node = bucketLinkedList.find(null, node => node.val.key === key);
 
     if (!node) {
-      bucketLinkedList.append({key, val});
+      bucketLinkedList.append({ key, val });
     } else {
       node.val.val = val;
     }

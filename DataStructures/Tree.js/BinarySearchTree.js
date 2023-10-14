@@ -8,7 +8,7 @@ class BSTNode {
 
   find(k) {
     if (k == this.key) return this
-    
+
     if (k < this.key) {
       if (this.left) {
         return this.left.find(k);
@@ -23,7 +23,7 @@ class BSTNode {
       }
     }
   }
-      
+
   findMin() {
     let cur = this;
 
@@ -45,15 +45,15 @@ class BSTNode {
   }
 
   nextLarger() {
-    if (this.right) 
+    if (this.right)
       return this.right.findMin()
-   
+
     let cur = this;
 
     while (cur.parent && cur == cur.parent.right) {
       cur = cur.parent;
     }
-    
+
     if (cur.parent) {
       return cur.parent;
     } else {
@@ -62,15 +62,15 @@ class BSTNode {
   }
 
   lastSmaller() {
-    if (this.left) 
+    if (this.left)
       return this.left.findMax()
-   
+
     let cur = this;
 
     while (cur.parent && cur == cur.parent.left) {
       cur = cur.parent;
     }
-    
+
     if (cur.parent) {
       return cur.parent;
     } else {
@@ -97,35 +97,35 @@ class BSTNode {
       }
     }
   }
-  
+
   delete() {
     if (!this.left || !this.right) {
       if (this == this.parent.left) {
         this.parent.left = this.left || this.right;
-       
+
         if (this.parent.left) {
-          this.parent.left.parent = this.parent;     
-        }                                          
-      } else {                                       
+          this.parent.left.parent = this.parent;
+        }
+      } else {
         this.parent.right = this.left || this.right;
-        
+
         if (this.parent.right) {
           this.parent.right.parent = this.parent;
         }
       }
-        
+
       return this;
     } else {
       let s = this.nextLarger();
       [this.key, s.key] = [s.key, this.key];
       return s.delete();
     }
-  }     
+  }
 
   findAtLeast(k) {
     let cur = this;
     let ans = null;
-    
+
     while (cur) {
       if (cur.key == k) {
         return cur;
@@ -136,14 +136,14 @@ class BSTNode {
         cur = cur.left;
       }
     }
-    
+
     return ans;
   }
 
   findAtMost(k) {
     let cur = this;
     let ans = null;
-    
+
     while (cur) {
       if (cur.key == k) {
         return cur;
@@ -154,7 +154,7 @@ class BSTNode {
         cur = cur.left;
       }
     }
-    
+
     return ans;
   }
 }
@@ -163,14 +163,14 @@ class MinBSTNode extends BSTNode {
   findMin() {
     return this.min;
   }
-  
+
   insert(node) {
     if (node == null) return;
 
     if (node.key < this.key) {
       if (node.key < this.min.key) {
         this.min = node;
-        
+
         if (this.left == null) {
           node.parent = this;
           this.left = node;
@@ -192,13 +192,13 @@ class MinBSTNode extends BSTNode {
     if (this.left == null || this.right == null) {
       if (this == this.parent.left) {
         this.parent.left = this.left || this.right;
-        
+
         if (this.parent.left != null) {
           this.parent.left.parent = this.parent;
           this.parent.min = this.parent.left.min;
-        } else { 
+        } else {
           this.parent.min = this.parent;
-          let cur  = this.parent;
+          let cur = this.parent;
 
           while (cur.parent != null && cur == cur.parent.left) {
             cur.parent.min = cur.min;
@@ -238,16 +238,16 @@ class BinarySearchTree {
   findMax() {
     return this.root && this.root.findMax();
   }
-      
+
   nextLarger(k) {
     const node = this.find(k);
-    return node && node.nextLarger();    
-  } 
+    return node && node.nextLarger();
+  }
 
   lastSmaller(k) {
     const node = this.find(k);
-    return node && node.lastSmaller();    
-  } 
+    return node && node.lastSmaller();
+  }
 
   insert(k) {
     const node = new this.TreeNode(null, k);
@@ -264,12 +264,12 @@ class BinarySearchTree {
   delete(k) {
     const node = this.find(k);
     if (node == null) return null;
-    
+
     if (node == this.root) {
       const pseudoroot = new this.TreeNode(null, 0);
       pseudoroot.left = this.root;
       this.root.parent = pseudoroot;
-      
+
       const deleted = this.root.delete();
       this.root = pseudoroot.left;
 
@@ -279,7 +279,7 @@ class BinarySearchTree {
 
       return deleted;
     } else {
-      return node.delete(); 
+      return node.delete();
     }
   }
 

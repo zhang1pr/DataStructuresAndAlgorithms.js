@@ -4,19 +4,19 @@ class HashTable {
   }
 
   hash(key) {
-  
+
   }
 
   set(key, val) {
-    
+
   }
 
   delete(key) {
-    
+
   }
 
   get(key) {
-    
+
   }
 
   has(key) {

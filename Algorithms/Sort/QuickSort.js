@@ -3,7 +3,7 @@ function quickSort(array) {
     if (p >= r) {
       return;
     }
-    
+
     const q = partition(p, r);
     sort(p, q - 1);
     sort(q + 1, r);

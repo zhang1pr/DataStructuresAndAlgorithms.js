@@ -1,7 +1,7 @@
 class ListNode {
   constructor() {
 
-  }  
+  }
 }
 
 class QueueBySinglyLinkedList {
@@ -19,13 +19,13 @@ class QueueBySinglyLinkedList {
 
   peek() {
 
-  }  
-    
+  }
+
   enqueue(val) {
 
   }
 
-  dequeue() {    
-  
+  dequeue() {
+
   }
 }

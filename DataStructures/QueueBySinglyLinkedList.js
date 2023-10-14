@@ -2,7 +2,7 @@ class ListNode {
   constructor(val, next = null) {
     this.val = val;
     this.next = next;
-  }  
+  }
 }
 
 class QueueBySinglyLinkedList {
@@ -21,9 +21,9 @@ class QueueBySinglyLinkedList {
   }
 
   peek() {
-    return this.head;   
-  }  
-    
+    return this.head;
+  }
+
   enqueue(val) {
     const newNode = new ListNode(val);
     this.sz++;
@@ -33,13 +33,13 @@ class QueueBySinglyLinkedList {
       this.tail = newNode;
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;  
+      this.tail = newNode;
     }
 
-    return this; 
+    return this;
   }
 
-  dequeue() {    
+  dequeue() {
     if (!this.head) {
       return null;
     }

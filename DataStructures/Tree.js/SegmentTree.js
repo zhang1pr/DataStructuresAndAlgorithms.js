@@ -45,7 +45,7 @@ class SegmentTree {
   }
 
   update(arrayIndex, value) {
-    this.updateTreeRange(0, 0, this.array.length-1, arrayIndex, value);
+    this.updateTreeRange(0, 0, this.array.length - 1, arrayIndex, value);
   }
 
   updateTreeRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
@@ -53,7 +53,7 @@ class SegmentTree {
       this.tree[treePos] = value;
     } else {
       const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
-      
+
       if (arrayIndex <= middleIndex) {
         this.updateTreeRange(treePos * 2 + 1, leftIndex, middleIndex, arrayIndex, value);
       } else {

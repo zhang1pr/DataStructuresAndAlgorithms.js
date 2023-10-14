@@ -8,7 +8,7 @@ class BinaryIndexedTree {
   }
 
   query(position) {
-    
+
   }
 
   queryRange(leftIndex, rightIndex) {

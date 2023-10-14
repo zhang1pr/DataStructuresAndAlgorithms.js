@@ -33,15 +33,15 @@ class TrieNode {
   hasChild(char) {
     return this.getChild(char) != null;
   }
-  
+
   hasChildren() {
     return this.children.filter(Boolean).length > 0;
   }
 
   getChildren() {
     return this.children
-             .map((item, index) => item ? String.fromCharCode(index + 97) : null)
-             .filter(Boolean);
+      .map((item, index) => item ? String.fromCharCode(index + 97) : null)
+      .filter(Boolean);
   }
 }
 

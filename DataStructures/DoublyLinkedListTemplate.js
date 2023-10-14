@@ -1,7 +1,7 @@
 class ListNode {
   constructor() {
 
-  }  
+  }
 }
 
 class DoublyLinkedList {
@@ -18,31 +18,31 @@ class DoublyLinkedList {
   }
 
   deleteSameFromHead(val) {
-    
+
   }
 
   deleteSameFromTail(val) {
-    
+
   }
 
   findFromHead(val, callback) {
-    
+
   }
 
   findFromTail(val, callbackl) {
-    
+
   }
 
   deleteHead() {
-    
+
   }
 
   deleteTail() {
-   
+
   }
 
   reverse() {
-    
+
   }
 
   traverseFromHead() {

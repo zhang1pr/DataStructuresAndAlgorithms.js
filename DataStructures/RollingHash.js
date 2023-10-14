@@ -24,7 +24,7 @@ class RollingHash {
   }
 
   query(i, j) {
-    return (this.p[j+1] - this.p[i] + this.MOD) * this.pi[i] % this.MOD;
+    return (this.p[j + 1] - this.p[i] + this.MOD) * this.pi[i] % this.MOD;
   }
 
   binpow(a, b, m) {

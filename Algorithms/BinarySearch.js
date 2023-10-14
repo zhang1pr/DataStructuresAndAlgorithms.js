@@ -4,7 +4,7 @@ function binarySearchIteration(array, value) {
 
   while (low <= high) {
     const mid = low + ((high - low) >> 1);
-    
+
     if (array[mid] == value) {
       return mid;
     } else if (array[mid] < value) {
@@ -22,9 +22,9 @@ function binarySearchRecursion(array, value) {
     if (low > high) {
       return -1;
     }
-  
+
     const mid = low + ((high - low) >> 1);
-    
+
     if (array[mid] == value) {
       return mid;
     } else if (array[mid] < value) {
@@ -42,8 +42,8 @@ function binarySearchFirstDuplicate(array, value) {
   let high = array.length - 1;
 
   while (low <= high) {
-    const mid =  low + ((high - low) >> 1);
-    
+    const mid = low + ((high - low) >> 1);
+
     if (array[mid] > value) {
       high = mid - 1;
     } else if (array[mid] < value) {
@@ -56,7 +56,7 @@ function binarySearchFirstDuplicate(array, value) {
       }
     }
   }
-  
+
   return -1;
 }
 
@@ -65,8 +65,8 @@ function binarySearchLastDuplicate(array, value) {
   let high = array.length - 1;
 
   while (low <= high) {
-    const mid =  low + ((high - low) >> 1);
-    
+    const mid = low + ((high - low) >> 1);
+
     if (array[mid] > value) {
       high = mid - 1;
     } else if (array[mid] < value) {
@@ -79,7 +79,7 @@ function binarySearchLastDuplicate(array, value) {
       }
     }
   }
-  
+
   return -1;
 }
 
@@ -88,8 +88,8 @@ function binarySearchFirstLargerOrEqual(array, value) {
   let high = array.length - 1;
 
   while (low <= high) {
-    const mid =  low + ((high - low) >> 1);
-    
+    const mid = low + ((high - low) >> 1);
+
     if (array[mid] >= value) {
       if (mid == 0 || array[mid - 1] < value) {
         return mid;
@@ -109,11 +109,11 @@ function binarySearchLastSmallerOrEqual(array, value) {
   let high = array.length - 1;
 
   while (low <= high) {
-    const mid =  low + ((high - low) >> 1);
-    
-    if (array[mid] > value) { 
-      high = mid - 1; 
-    } else { 
+    const mid = low + ((high - low) >> 1);
+
+    if (array[mid] > value) {
+      high = mid - 1;
+    } else {
       if (mid == array.length - 1 || array[mid + 1] > value) {
         return mid;
       } else {

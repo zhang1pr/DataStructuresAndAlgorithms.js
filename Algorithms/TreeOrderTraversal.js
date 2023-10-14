@@ -12,7 +12,7 @@ function inOrder(root) {
   if (root == null) {
     return;
   }
-  
+
   inOrder(root.left);
   console.log(root.val);
   inOrder(root.right);
@@ -22,7 +22,7 @@ function postOrder(root) {
   if (root == null) {
     return;
   }
-  
+
   postOrder(root.left);
   postOrder(root.right);
   console.log(root.val);

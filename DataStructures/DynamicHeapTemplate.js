@@ -16,13 +16,13 @@ class DynamicHeap {
   }
 
   isEmpty() {
-    
+
   }
-  
+
   size() {
-  
+
   }
-  
+
   heapifyUp(childIndex) {
 
   }
@@ -32,6 +32,6 @@ class DynamicHeap {
   }
 
   checkInvariant(a, b) {
-    
+
   }
 }
