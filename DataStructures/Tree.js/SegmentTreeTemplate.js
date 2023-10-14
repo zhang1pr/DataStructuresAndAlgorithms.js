@@ -11,27 +11,23 @@ class SegmentTree {
 
   }
 
-  buildTree(leftIndex, rightIndex, position) {
+  buildTree(treePos, leftIndex, rightIndex) {
 
   }
 
-  update(arrayIndex, value) {
+  update(updateIndex, value) {
 
   }
 
-  updateTreeRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
+  updateTreeRange(updateIndex, treePos, leftIndex, rightIndex, value) {
 
   }
 
-  query(queryIndex) {
+  queryRange(leftQueryIndex, rightQueryIndex) {
 
   }
 
-  queryRange(leftIndex, rightIndex) {
-
-  }
-
-  queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, position) {
+  queryTreeRange(leftQueryIndex, rightQueryIndex, treePos, leftIndex, rightIndex) {
 
   }
 }

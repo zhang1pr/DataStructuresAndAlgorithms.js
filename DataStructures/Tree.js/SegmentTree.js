@@ -6,7 +6,7 @@ class SegmentTree {
 
     this.tree = this.createTree(this.array);
 
-    this.buildTree(0, this.array.length - 1, 0);
+    this.buildTree(0, 0, this.array.length - 1);
   }
 
   isPowerOfTwo(num) {
@@ -31,60 +31,57 @@ class SegmentTree {
     return Array(treeLength);
   }
 
-  buildTree(leftIndex, rightIndex, treePos) {
+  buildTree(treePos, leftIndex, rightIndex) {
     if (leftIndex == rightIndex) {
       this.tree[treePos] = this.array[leftIndex];
       return;
     }
 
     const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
-    this.buildTree(leftIndex, middleIndex, treePos * 2 + 1);
-    this.buildTree(middleIndex + 1, rightIndex, treePos * 2 + 2);
+    this.buildTree(treePos * 2 + 1, leftIndex, middleIndex);
+    this.buildTree(treePos * 2 + 2, middleIndex + 1, rightIndex);
 
     this.tree[treePos] = this.operation(this.tree[treePos * 2 + 1], this.tree[treePos * 2 + 2]);
   }
 
-  update(arrayIndex, value) {
-    this.updateTreeRange(0, 0, this.array.length - 1, arrayIndex, value);
+  update(updateIndex, value) {
+    this.updateTreeRange(updateIndex, 0, 0, this.array.length - 1, value);
   }
 
-  updateTreeRange(treePos, leftIndex, rightIndex, arrayIndex, value) {
+  updateTreeRange(updateIndex, treePos, leftIndex, rightIndex, value) {
     if (leftIndex == rightIndex) {
       this.tree[treePos] = value;
-    } else {
-      const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
-
-      if (arrayIndex <= middleIndex) {
-        this.updateTreeRange(treePos * 2 + 1, leftIndex, middleIndex, arrayIndex, value);
-      } else {
-        this.updateTreeRange(treePos * 2 + 2, middleIndex + 1, rightIndex, arrayIndex, value);
-      }
-
-      this.tree[treePos] = this.operation(this.tree[treePos * 2 + 1], this.tree[treePos * 2 + 2]);
+      return;
     }
+
+    const middleUpdateIndex = Math.floor((leftIndex + rightIndex) / 2);
+
+    if (updateIndex <= middleUpdateIndex) {
+      this.updateTreeRange(updateIndex, treePos * 2 + 1, leftIndex, middleUpdateIndex, value);
+    } else {
+      this.updateTreeRange(updateIndex, treePos * 2 + 2, middleUpdateIndex + 1, rightIndex, value);
+    }
+
+    this.tree[treePos] = this.operation(this.tree[treePos * 2 + 1], this.tree[treePos * 2 + 2]);
   }
 
-  query(queryIndex) {
-    return this.queryRange(0, queryIndex);
+  queryRange(leftQueryIndex, rightQueryIndex) {
+    return this.queryTreeRange(leftQueryIndex, rightQueryIndex, 0, 0, this.array.length - 1);
   }
 
-  queryRange(queryLeftIndex, queryRightIndex) {
-    return this.queryTreeRange(queryLeftIndex, queryRightIndex, 0, this.array.length - 1, 0);
-  }
-
-  queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, rightIndex, treePos) {
-    if (queryLeftIndex <= leftIndex && queryRightIndex >= rightIndex) {
+  queryTreeRange(leftQueryIndex, rightQueryIndex, treePos, leftIndex, rightIndex) {
+    if (leftQueryIndex <= leftIndex && rightQueryIndex >= rightIndex) {
       return this.tree[treePos];
     }
 
-    if (queryLeftIndex > rightIndex || queryRightIndex < leftIndex) {
+    if (leftQueryIndex > rightIndex || rightQueryIndex < leftIndex) {
       return this.defaultVal;
     }
 
-    const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
+    const middleQueryIndex = Math.floor((leftIndex + rightIndex) / 2);
 
-    const leftResult = this.queryTreeRange(queryLeftIndex, queryRightIndex, leftIndex, middleIndex, treePos * 2 + 1);
-    const rightResult = this.queryTreeRange(queryLeftIndex, queryRightIndex, middleIndex + 1, rightIndex, treePos * 2 + 2);
+    const leftResult = this.queryTreeRange(leftQueryIndex, rightQueryIndex, treePos * 2 + 1, leftIndex, middleQueryIndex);
+    const rightResult = this.queryTreeRange(leftQueryIndex, rightQueryIndex, treePos * 2 + 2, middleQueryIndex + 1, rightIndex);
 
     return this.operation(leftResult, rightResult);
   }
