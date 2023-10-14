@@ -1,0 +1,16 @@
+{
+  "name": "datastructuresandalgorithms",
+  "version": "1.0.0",
+  "description": "Data Structures and Algorithms notes",
+  "main": "GCD.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
+  }
+}
