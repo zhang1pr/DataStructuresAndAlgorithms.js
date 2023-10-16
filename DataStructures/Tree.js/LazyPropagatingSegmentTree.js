@@ -49,19 +49,19 @@ class LazyPropagatingSegmentTree {
   }
 
   updateTreeRange(leftUpdateIndex, rightUpdateIndex, treePos, leftIndex, rightIndex, value) {
-    if (leftUpdateIndex > rightUpdateIndex) {
+    if (leftUpdateIndex > rightIndex || rightUpdateIndex < leftIndex) {
       return;
     }
 
-    if (leftUpdateIndex == leftIndex && rightUpdateIndex == rightIndex) {
+    if (leftUpdateIndex <= leftIndex && rightUpdateIndex >= rightIndex) {
       this.tree[treePos] = this.operation(this.tree[treePos], value);
       return;
     }
 
     const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
 
-    this.updateTreeRange(leftUpdateIndex, middleIndex, treePos * 2 + 1, leftIndex, middleIndex, value);
-    this.updateTreeRange(middleIndex + 1, rightUpdateIndex, treePos * 2 + 2, middleIndex + 1, rightIndex, value);
+    this.updateTreeRange(leftUpdateIndex, rightUpdateIndex, treePos * 2 + 1, leftIndex, middleIndex, value);
+    this.updateTreeRange(leftUpdateIndex, rightUpdateIndex, treePos * 2 + 2, middleIndex + 1, rightIndex, value);
   }
 
   query(queryIndex) {
