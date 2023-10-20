@@ -38,7 +38,7 @@ class LazyPropagatingSegmentTree {
     }
 
     const middleIndex = Math.floor((leftIndex + rightIndex) / 2);
-    this.buildTree(treePos * 2 + 1, leftIndex, middleIndex,);
+    this.buildTree(treePos * 2 + 1, leftIndex, middleIndex);
     this.buildTree(treePos * 2 + 2, middleIndex + 1, rightIndex);
 
     this.tree[treePos] = 0;
