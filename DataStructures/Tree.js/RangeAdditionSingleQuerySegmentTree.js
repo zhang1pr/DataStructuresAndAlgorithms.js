@@ -1,4 +1,4 @@
-class LazyPropagatingSegmentTree {
+class RangeAdditionSingleQuerySegmentTree {
   constructor(array, operation, defaultVal) {
     this.array = array;
     this.operation = operation;
