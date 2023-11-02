@@ -20,7 +20,7 @@ class DisjointSetUnion {
 
     if (xr == yr) return false;
 
-    if (!this.rank.has(xr)) this.rank.set(xr, 1)
+    if (!this.rank.has(xr)) this.rank.set(xr, 1);
     if (!this.rank.has(yr)) this.rank.set(yr, 1);
 
     if (this.rank.get(xr) < this.rank.get(yr)) [xr, yr] = [yr, xr];
@@ -28,7 +28,7 @@ class DisjointSetUnion {
 
     this.par.set(yr, xr);
 
-    if (!this.sz.has(xr)) this.sz.set(xr, 1)
+    if (!this.sz.has(xr)) this.sz.set(xr, 1);
     if (!this.sz.has(yr)) this.sz.set(yr, 1);
 
     this.sz.set(xr, this.sz.get(xr) + this.sz.get(yr));

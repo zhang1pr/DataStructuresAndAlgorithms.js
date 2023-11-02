@@ -1,7 +1,7 @@
 class RollingHash {
   constructor(s) {
     this.P = 37n;
-    this.MOD = 344555666677777n
+    this.MOD = 344555666677777n;
     let Pinv = this.binpow(this.P, this.MOD - 2n, this.MOD);
 
     let prefixes = [0n];

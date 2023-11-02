@@ -78,7 +78,7 @@ class Trie {
       }
 
       currentNode.removeChild(char);
-    };
+    }
 
     DFS(this.head, 0);
 

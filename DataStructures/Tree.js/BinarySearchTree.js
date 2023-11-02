@@ -1,13 +1,13 @@
 class BSTNode {
   constructor(parent, k) {
-    this.key = k
+    this.key = k;
     this.parent = parent;
     this.left = null;
     this.right = null;
   }
 
   find(k) {
-    if (k == this.key) return this
+    if (k == this.key) return this;
 
     if (k < this.key) {
       if (this.left) {
@@ -46,7 +46,7 @@ class BSTNode {
 
   nextLarger() {
     if (this.right)
-      return this.right.findMin()
+      return this.right.findMin();
 
     let cur = this;
 
@@ -63,7 +63,7 @@ class BSTNode {
 
   lastSmaller() {
     if (this.left)
-      return this.left.findMax()
+      return this.left.findMax();
 
     let cur = this;
 
@@ -83,17 +83,17 @@ class BSTNode {
 
     if (node.key < this.key) {
       if (this.left) {
-        this.left.insert(node)
+        this.left.insert(node);
       } else {
-        node.parent = this
-        this.left = node
+        node.parent = this;
+        this.left = node;
       }
     } else {
       if (this.right) {
-        this.right.insert(node)
+        this.right.insert(node);
       } else {
-        node.parent = this
-        this.right = node
+        node.parent = this;
+        this.right = node;
       }
     }
   }

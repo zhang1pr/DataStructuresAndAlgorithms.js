@@ -46,7 +46,7 @@ class AVLNode {
 
   nextLarger() {
     if (this.right)
-      return this.right.findMin()
+      return this.right.findMin();
 
     let cur = this;
 
@@ -63,7 +63,7 @@ class AVLNode {
 
   lastSmaller() {
     if (this.left)
-      return this.left.findMax()
+      return this.left.findMax();
 
     let cur = this;
 
@@ -83,17 +83,17 @@ class AVLNode {
 
     if (node.key < this.key) {
       if (this.left) {
-        this.left.insert(node)
+        this.left.insert(node);
       } else {
         node.parent = this;
-        this.left = node
+        this.left = node;
       }
     } else {
       if (this.right) {
-        this.right.insert(node)
+        this.right.insert(node);
       } else {
         node.parent = this;
-        this.right = node
+        this.right = node;
       }
     }
   }
@@ -287,8 +287,8 @@ class AVLTree {
       x.right.parent = x;
     }
 
-    y.left = x
-    x.parent = y
+    y.left = x;
+    x.parent = y;
     AVLTree.updateHeight(x);
     AVLTree.updateHeight(y);
   }
@@ -303,7 +303,7 @@ class AVLTree {
         y.parent.right = y;
       }
     } else {
-      this.root = y
+      this.root = y;
     }
 
     x.left = y.right;

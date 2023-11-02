@@ -45,7 +45,7 @@ class RangeAdditionSingleQuerySegmentTree {
   }
 
   updateRange(leftUpdateIndex, rightUpdateIndex, value) {
-    this.updateTreeRange(leftUpdateIndex, rightUpdateIndex, 0, 0, this.array.length - 1, value)
+    this.updateTreeRange(leftUpdateIndex, rightUpdateIndex, 0, 0, this.array.length - 1, value);
   }
 
   updateTreeRange(leftUpdateIndex, rightUpdateIndex, treePos, leftIndex, rightIndex, value) {
@@ -87,6 +87,6 @@ class RangeAdditionSingleQuerySegmentTree {
       result = this.queryTreeRange(queryIndex, treePos * 2 + 2, middleIndex + 1, rightIndex);
     }
 
-    return this.operation(result, this.tree[treePos])
+    return this.operation(result, this.tree[treePos]);
   }
 }
