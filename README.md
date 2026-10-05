@@ -1,2 +1,2 @@
 # DataStructuresAndAlgorithms.js
-Data Structures and Algorithms implementation and notes
+Data Structures and Algorithms implementations and notes
